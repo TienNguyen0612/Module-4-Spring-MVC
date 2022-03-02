@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List</title>
+</head>
+<body>
+
+<!--<h1 th:if="${mess} != null "><span th:text="${mess}"></span></h1>-->
+<p>
+    <a href="/product/create">Add new product</a>
+</p>
+
+<form th:action="@{/product/search}" method="get">
+    <input name="search" type="text" placeholder="Search">
+    <button type="submit">Search</button>
+</form>
+<br>
+
+<table id = "products" border="1">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Producer</th>
+        <th>Delete</th>
+        <th>Edit</th>
+        <th>View</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="p : ${products}">
+        <td th:text="${p.getId()}"></td>
+        <td th:text="${p.getName()}"></td>
+        <td th:text="${p.getPrice()}"></td>
+        <td th:text="${p.getDescription()}"></td>
+        <td th:text="${p.getProducer()}"></td>
+        <td><a th:href="@{/product/__${p.id}__/delete}"
+               onclick="return confirm('Are you sure you want to Delete?')">Delete</a></td>
+        <td><a th:href="@{/product/__${p.id}__/edit}">Edit</a></td>
+        <td><a th:href="@{/product/{id}/view(id=${p.getId()})}">View</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head th:replace="/layout :: head">
+    <title></title></head>
+<body>
+<h3>Customers</h3>
+<p>
+    <a th:href="@{/customer/create}">
+        Add new customer
+    </a>
+</p>
+<div class="notify">
+    <!--/*@thymesVar id="message" type="controller"*/-->
+    <div th:if="${message}">
+        <span th:text="${message}"></span>
+    </div>
+</div>
+
+<table id = "customers">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>View</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="customer : ${customers}">
+        <td th:text="${customer.getName()}"></td>
+        <td th:text="${customer.getEmail()}"></td>
+        <td th:text="${customer.getAddress()}"></td>
+        <td><a th:href="@{/customer/{id}/edit(id=${customer.getId()})}">Edit</a></td>
+        <td><a th:href="@{/customer/{id}/delete(id=${customer.getId()})}">Delete</a></td>
+        <td><a th:href="@{/customer/{id}/view(id=${customer.getId()})}">View</a></td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
